@@ -13,6 +13,5 @@ public class FitnessApp {
         System.out.println("Fitness App Info:");
         user.printInfo();
         workoutPlan.printPlan();
-
     }
 }
