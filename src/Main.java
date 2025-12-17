@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        User u1 = new User("Michael", 20, 80.5);
-        User u2 = new User("Michael", 20, 80.5);
+        User u1 = new User("Khantemir", 20, 80.5);
+        User u2 = new User("Madi", 20, 80.5);
         User u3 = new User("David", 22, 90.0);
         WorkoutPlan w1 = new WorkoutPlan("Chest Day", 60, 500);
         WorkoutPlan w2 = new WorkoutPlan("Leg Day", 45, 450);
