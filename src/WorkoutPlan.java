@@ -1,29 +1,32 @@
-public class WorkoutPlan {
-    private String type;
-    private int durationMinutes;
+public class WorkoutPlan extends Workout {
     private double caloriesBurned;
+
     public WorkoutPlan(String type, int durationMinutes, double caloriesBurned) {
-        this.type = type;
-        this.durationMinutes = durationMinutes;
+        super(type, durationMinutes);
         this.caloriesBurned = caloriesBurned;
     }
-    public String getType() { return type; }
-    public int getDurationMinutes() { return durationMinutes; }
+
     public double getCaloriesBurned() { return caloriesBurned; }
-    public void setType(String type) { this.type = type; }
-    public void setDurationMinutes(int durationMinutes) { this.durationMinutes = durationMinutes; }
     public void setCaloriesBurned(double caloriesBurned) { this.caloriesBurned = caloriesBurned; }
-    public void printPlan() {
-        System.out.println("Workout: " + type + " | Duration: " + durationMinutes + " min | Calories: " + caloriesBurned);
+
+    public boolean isHighCalorie() {
+        return caloriesBurned > 400;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", Calories burned: " + caloriesBurned;
+    }
+
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (!super.equals(obj)) return false;
         WorkoutPlan other = (WorkoutPlan) obj;
+        return Double.compare(caloriesBurned, other.caloriesBurned) == 0;
+    }
 
-        return durationMinutes == other.durationMinutes &&
-                Double.compare(other.caloriesBurned, caloriesBurned) == 0 &&
-                type.equals(other.type);
+    @Override
+    public int hashCode() {
+        return super.hashCode() + (int) caloriesBurned;
     }
 }

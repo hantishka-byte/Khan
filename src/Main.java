@@ -3,36 +3,45 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter name for user 1: ");
-        String name1 = sc.nextLine();
-        System.out.print("Enter age for user 1: ");
-        int age1 = sc.nextInt();
-        System.out.print("Enter weight for user 1: ");
-        double weight1 = sc.nextDouble();
-        sc.nextLine();
-        User u1 = new User(name1, age1, weight1);
-        System.out.print("\nEnter name for user 2: ");
-        String name2 = sc.nextLine();
-        System.out.print("Enter age for user 2: ");
-        int age2 = sc.nextInt();
-        System.out.print("Enter weight for user 2: ");
-        double weight2 = sc.nextDouble();
-        sc.nextLine();
-        User u2 = new User(name2, age2, weight2);
-        System.out.print("\nEnter name for user 3: ");
-        String name3 = sc.nextLine();
-        System.out.print("Enter age for user 3: ");
-        int age3 = sc.nextInt();
-        System.out.print("Enter weight for user 3: ");
-        double weight3 = sc.nextDouble();
-        User u3 = new User(name3, age3, weight3);
+        FitnessApp app = new FitnessApp();
+
+        // Create users from input
+        for (int i = 1; i <= 2; i++) {
+            System.out.print("Enter name for user " + i + ": ");
+            String name = sc.nextLine();
+
+            System.out.print("Enter age: ");
+            int age = sc.nextInt();
+
+            System.out.print("Enter weight: ");
+            double weight = sc.nextDouble();
+            sc.nextLine();
+
+            app.addUser(new User(name, age, weight));
+        }
+
+        // Add default workouts to pool
         WorkoutPlan w1 = new WorkoutPlan("Chest Day", 60, 500);
         WorkoutPlan w2 = new WorkoutPlan("Leg Day", 45, 450);
-        FitnessApp app = new FitnessApp(u1, w1);
+        app.addWorkout(w1);
+        app.addWorkout(w2);
+
+        // Print data
         app.showAppInfo();
-        System.out.println("u1 = u2? " + u1.equals(u2));
-        System.out.println("u1 = u3? " + u1.equals(u3));
-        System.out.println("w1 = w2? " + w1.equals(w2));
+
+        // Compare objects
+        System.out.println("\nCompare workouts (w1 vs w2): " + w1.equals(w2));
+
+        // Filtering & search & sorting
+        app.filterHighCalories();
+
+        System.out.print("\nEnter user name to search: ");
+        String search = sc.nextLine();
+        app.searchUser(search);
+
+        app.sortUsersByWeight();
+        app.sortWorkoutsByDuration();
+
         sc.close();
     }
 }
